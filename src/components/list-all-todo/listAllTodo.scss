@@ -1,0 +1,16 @@
+.all-row-todo-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.checkbox-and-text {
+  display: flex;
+  flex-direction: row;
+}
+.crossed-text {
+  text-decoration: line-through;
+}
+.text-style {
+  
+}
