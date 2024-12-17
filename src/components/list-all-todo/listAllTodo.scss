@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  flex-grow: 1;
 }
 .checkbox-and-text {
   display: flex;
@@ -10,7 +11,4 @@
 }
 .crossed-text {
   text-decoration: line-through;
-}
-.text-style {
-  
 }
