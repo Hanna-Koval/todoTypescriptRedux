@@ -14,7 +14,7 @@ const SortableItem = ({ el }: PropsDraggable) => {
     useSortable({
       id: el.id,
       transition: {
-        duration: 150, // milliseconds
+        duration: 200, // milliseconds
         easing: 'cubic-bezier(0.25, 1, 0.5, 1)',
       },
     });

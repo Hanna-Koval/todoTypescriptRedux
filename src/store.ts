@@ -5,6 +5,7 @@ import {
   createSlice,
   combineReducers,
 } from '@reduxjs/toolkit';
+import { sortItem } from './functions';
 
 export interface Todo {
   id: string;
@@ -32,17 +33,21 @@ export const mainSlice = createSlice({
       return state.filter((todo) => id !== todo.id);
     },
     check: (state: Todo[], action: PayloadAction<string>) => {
-      return state.map((todo) =>
-        action.payload === todo.id
-          ? { ...todo, completed: !todo.completed }
-          : todo
+      return sortItem(
+        state.map((todo) =>
+          action.payload === todo.id
+            ? { ...todo, completed: !todo.completed }
+            : todo
+        )
       );
     },
     important: (state: Todo[], action: PayloadAction<string>) => {
-      return state.map((todo) =>
-        action.payload === todo.id
-          ? { ...todo, important: !todo.important }
-          : todo
+      return sortItem(
+        state.map((todo) =>
+          action.payload === todo.id
+            ? { ...todo, important: !todo.important }
+            : todo
+        )
       );
     },
     edit: (state: Todo[], action: PayloadAction<Todo>) => {
