@@ -40,6 +40,11 @@ const StyledTextInput = React.forwardRef<HTMLDivElement, PropsStyledInput>(
             label={label}
             multiline={multiline}
             autoFocus={focused}
+            onFocus={function (e) {
+              let val = e.target.value;
+              e.target.value = '';
+              e.target.value = val;
+            }}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               onChange(event.target.value);
             }}
