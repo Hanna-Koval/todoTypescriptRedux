@@ -2,7 +2,7 @@ import TodoEl from '../todo/todo';
 import { Todo } from '../../store';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { IconButton } from '@mui/material';
+import { Grid, IconButton } from '@mui/material';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 
 interface PropsDraggable {
@@ -23,14 +23,21 @@ const SortableItem = ({ el }: PropsDraggable) => {
     transition,
     display: 'flex',
     justifyContent: 'space-between',
+    marginTop: 10,
   };
 
   return (
     <div style={style} ref={setNodeRef}>
-      <TodoEl el={el} />
-      <IconButton {...attributes} {...listeners}>
-        <DragIndicatorIcon />
-      </IconButton>
+      <Grid container alignItems="center">
+        <Grid item xs={11}>
+          <TodoEl el={el} />
+        </Grid>
+        <Grid item xs={1}>
+          <IconButton {...attributes} {...listeners}>
+            <DragIndicatorIcon />
+          </IconButton>
+        </Grid>
+      </Grid>
     </div>
   );
 };

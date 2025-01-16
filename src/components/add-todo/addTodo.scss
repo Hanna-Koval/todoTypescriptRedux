@@ -1,4 +1,8 @@
-.containerAddTodo {
+.container-add-todo {
   width: 100% !important;
   display: flex;
+  align-items: center;
+}
+.button-add-container {
+  padding-left: 10px !important;
 }

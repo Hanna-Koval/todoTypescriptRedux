@@ -1,8 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, Todo, todoActions } from '../../store';
 
-import './listAllTodo.scss';
-
 import {
   DndContext,
   closestCenter,

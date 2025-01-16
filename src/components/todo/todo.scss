@@ -1,0 +1,36 @@
+.all-row-todo-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-grow: 1;
+}
+.text-style {
+  margin: 0;
+  padding-left: 10px;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.4375em;
+  letter-spacing: 0.00938em;
+  max-width: 95%;
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+.checkbox-and-text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow-wrap: break-word;
+}
+.crossed-text {
+  margin: 0;
+  word-break: break-all;
+
+  text-decoration: line-through;
+  overflow-wrap: break-word;
+}
+.container-buttons-edit-delete {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
