@@ -1,14 +1,14 @@
 import './App.scss';
-import AddTodo from './components/add-todo/addTodo';
-import Header from './components/header/header';
-import ListTodos from './components/list-all-todo/listAllTodo';
+import AddTodo from './components/add-todo';
+import Header from './components/header';
+import AllTodoList from './components/list-all-todo';
 
 function App() {
   return (
     <div className="App">
       <Header />
       <AddTodo />
-      <ListTodos />
+      <AllTodoList />
     </div>
   );
 }

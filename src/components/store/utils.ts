@@ -1,5 +1,4 @@
-import React from 'react';
-import { Todo } from './store';
+import { Todo } from './reducer';
 
 export const sortItem = (todo: Todo[]): Todo[] => {
   return todo.sort(

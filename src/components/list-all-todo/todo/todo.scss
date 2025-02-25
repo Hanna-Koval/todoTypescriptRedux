@@ -1,8 +1,7 @@
 .all-row-todo-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   flex-grow: 1;
 }
 .text-style {
@@ -10,8 +9,6 @@
   padding-left: 10px;
   font-weight: 400;
   font-size: 1rem;
-  line-height: 1.4375em;
-  letter-spacing: 0.00938em;
   max-width: 95%;
   word-break: break-all;
   overflow-wrap: break-word;
@@ -33,4 +30,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+}
+.container-text-or-input {
+  width: 100%;
 }

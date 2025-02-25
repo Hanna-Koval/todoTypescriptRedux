@@ -1,57 +1,37 @@
-import { Button, Grid } from '@mui/material';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { todoActions } from '../../store';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { todoActions } from '../store';
 import './addTodo.scss';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import StyledTextInput from '../custom-elements/customTextInput';
+import AddInput from './addInput';
+import AddButton from './addButton';
 
 interface FormInput {
   todo: string;
 }
 
 const AddTodo = () => {
-  const { handleSubmit, control } = useForm<FormInput>();
-
-  const onSubmit: SubmitHandler<FormInput> = (data) => {
-    dispatch(todoActions.add(data.todo));
-  };
-
   const dispatch = useDispatch();
   const [todo, setTodo] = useState<string>('');
+  const { handleSubmit } = useForm<FormInput>();
+
+  const onSubmit: SubmitHandler<FormInput> = (data) => {
+    if (todo !== '') {
+      dispatch(todoActions.add(data.todo));
+      console.log('submit form');
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Grid container className="container-add-todo">
-        <Grid item xs={10}>
-          <Controller
-            name="todo"
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <StyledTextInput
-                {...field}
-                id="outlined-basic"
-                label="Add a task"
-                value={todo}
-                onChange={(event: string) => {
-                  setTodo(event);
-                }}
-              />
-            )}
-          />
-        </Grid>
-        <Grid item xs={2} className="button-add-container">
-          <Button
-            type="submit"
-            onClick={() => {
-              todo && dispatch(todoActions.add(todo));
-              setTodo('');
-            }}
-          >
-            Add
-          </Button>
-        </Grid>
-      </Grid>
+      <div className="container-add-todo">
+        <div className="container-add-todo-input">
+          <AddInput setTodo={setTodo} todo={todo} />
+        </div>
+        <div className="button-add-container">
+          <AddButton setTodo={setTodo} todo={todo} />
+        </div>
+      </div>
     </form>
   );
 };

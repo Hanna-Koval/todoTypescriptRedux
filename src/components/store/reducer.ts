@@ -1,11 +1,7 @@
+import { combineReducers } from 'redux';
+import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { sortItem } from './utils';
 import { arrayMove } from '@dnd-kit/sortable';
-import {
-  PayloadAction,
-  configureStore,
-  createSlice,
-  combineReducers,
-} from '@reduxjs/toolkit';
-import { sortItem } from './functions';
 
 export interface Todo {
   id: string;
@@ -16,7 +12,7 @@ export interface Todo {
 
 const initialState: Todo[] = [];
 
-export const mainSlice = createSlice({
+export const reducers = createSlice({
   name: 'todos',
   initialState: initialState,
   reducers: {
@@ -54,7 +50,7 @@ export const mainSlice = createSlice({
       const { id, text } = action.payload;
       return state.map((todo) => (id === todo.id ? { ...todo, text } : todo));
     },
-    swapeItems: (
+    swopeItems: (
       state: Todo[],
       action: PayloadAction<{ activeId: string; overId: string }>
     ) => {
@@ -66,15 +62,13 @@ export const mainSlice = createSlice({
   },
 });
 
-export const todoActions = mainSlice.actions;
+export const todoActions = reducers.actions;
 
 const rootReducer = combineReducers({
-  todos: mainSlice.reducer,
+  todos: reducers.reducer,
 });
-const store = configureStore({
+export const store = configureStore({
   reducer: rootReducer,
 });
-
-export default store;
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -1,6 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, Todo, todoActions } from '../../store';
-
 import {
   DndContext,
   closestCenter,
@@ -15,19 +13,13 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import React, { Fragment } from 'react';
-import SortableItem from '../Draggable/sortableItem';
+import { Todo, todoActions } from '../store/reducer';
+import { selectors } from '../store';
+import SortableItem from './draggable';
 
-const ListTodos = () => {
+const AllTodoList = () => {
   const dispatch = useDispatch();
-  const allTodo = useSelector((state: RootState) =>
-    state.todos
-      .slice()
-      .sort(
-        (el1: Todo, el2: Todo) =>
-          +el1.completed - +el2.completed || +el2.important - +el1.important
-      )
-  );
-
+  const allTodo = useSelector(selectors.selectAllTodo);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -39,7 +31,7 @@ const ListTodos = () => {
     const { active, over } = event;
     if (active.id !== over.id) {
       dispatch(
-        todoActions.swapeItems({ activeId: active.id, overId: over.id })
+        todoActions.swopeItems({ activeId: active.id, overId: over.id })
       );
     }
   };
@@ -66,4 +58,4 @@ const ListTodos = () => {
   );
 };
 
-export default ListTodos;
+export default AllTodoList;
