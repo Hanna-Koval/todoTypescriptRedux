@@ -1,15 +1,10 @@
-import { Checkbox, IconButton, Tooltip } from '@mui/material';
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import GradeIcon from '@mui/icons-material/Grade';
-import GradeOutlinedIcon from '@mui/icons-material/GradeOutlined';
 import StyledTextInput from '../../custom-elements/customTextInput';
-import SettingsBackupRestoreIcon from '@mui/icons-material/SettingsBackupRestore';
 import { Todo, todoActions } from '../../store/reducer';
-import { maxHeight, styleHoverButtons } from './styleMui';
 import './todo.scss';
+import TodoState from './todoState';
+import { CancelButton, DeleteButton, EditButton } from './todoActions';
 
 interface PropsTodoEl {
   el: Todo;
@@ -54,18 +49,12 @@ const TodoEl = React.forwardRef<HTMLDivElement, PropsTodoEl>(({ el }, ref) => {
   return (
     <div className="all-row-todo-container" ref={ref}>
       <div className="checkbox-and-text">
-        <Checkbox
-          checked={el.important}
-          onChange={handleChangeCheckboxImportant}
-          icon={<GradeOutlinedIcon />}
-          checkedIcon={<GradeIcon />}
-          sx={styleHoverButtons}
-        />
-        <Checkbox
-          checked={el.completed}
-          onChange={handleChangeCheckboxCompleted}
-          disabled={isEdit}
-          sx={styleHoverButtons}
+        <TodoState
+          important={el.important}
+          completed={el.completed}
+          isEdit={isEdit}
+          handleChangeCheckboxImportant={handleChangeCheckboxImportant}
+          handleChangeCheckboxCompleted={handleChangeCheckboxCompleted}
         />
       </div>
       <div className="container-text-or-input">
@@ -89,27 +78,11 @@ const TodoEl = React.forwardRef<HTMLDivElement, PropsTodoEl>(({ el }, ref) => {
       </div>
       <div className="container-buttons-edit-delete">
         {isEdit ? (
-          <Tooltip title="Cancel editing" arrow>
-            <IconButton onClick={handleCancel}>
-              <SettingsBackupRestoreIcon />
-            </IconButton>
-          </Tooltip>
+          <CancelButton handleCancel={handleCancel} />
         ) : (
-          <Tooltip title="Edit" arrow>
-            <IconButton
-              onClick={handleIsEdit}
-              disabled={el.completed}
-              sx={maxHeight}
-            >
-              <EditIcon />
-            </IconButton>
-          </Tooltip>
+          <EditButton handleIsEdit={handleIsEdit} completed={el.completed} />
         )}
-        <Tooltip title="Delete" arrow>
-          <IconButton onClick={handleDelete} sx={maxHeight}>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
+        <DeleteButton handleDelete={handleDelete} />
       </div>
     </div>
   );
